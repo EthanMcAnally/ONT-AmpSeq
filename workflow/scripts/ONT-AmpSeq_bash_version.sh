@@ -329,8 +329,9 @@ taxonomy_blastn() {
     local clustering_percentage="$5"
 
     blastn -query "$input" -word_size 11 -max_target_seqs 1 -num_threads "$threads" \
-    -evalue 1e-10 -outfmt "6 qseqid sseqid stitle evalue bitscore length pident" \
-    -out "$output/otus_tax.txt" -db "$database"
+    -reward 2 -penalty -3 -word_size 75 -gapopen 0 -gapextend 4 -evalue 20 \
+    -outfmt "6 qseqid sseqid stitle evalue bitscore length pident" \
+    -out "$output/otus_tax.txt" -db "$database" -task megablast
 
     #Remove rows containing information regarding statistics
     awk -F'\t' '{print $1 "\t" $3}' $output/otus_tax.txt > $output/otus_tax_mod.txt
