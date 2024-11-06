@@ -328,7 +328,7 @@ taxonomy_blastn() {
     local threads="$4"
     local clustering_percentage="$5"
 
-    blastn -query "$input" -word_size 11 -max_target_seqs 1 -num_threads "$threads" \
+    blastn -query "$input" -max_target_seqs 1 -num_threads "$threads" \
     -reward 2 -penalty -3 -word_size 75 -gapopen 0 -gapextend 4 -evalue 20 \
     -outfmt "6 qseqid sseqid stitle evalue bitscore length pident" \
     -out "$output/otus_tax.txt" -db "$database" -task megablast
