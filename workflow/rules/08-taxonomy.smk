@@ -49,7 +49,11 @@ rule taxonomy_blast:
         blastn \
             -evalue {params.e_value} \
             -outfmt "6 qseqid stitle evalue bitscore length pident" \
-            -word_size 11 \
+            -word_size 75 \
+            -reward 2 \
+            -penalty -3 \
+            -gapopen 0 \
+            -gapextend 4 \
             -max_target_seqs 1 \
             -db {params.db_path} \
             -num_threads {threads} \
